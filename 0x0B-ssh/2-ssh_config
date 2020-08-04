@@ -1,0 +1,6 @@
+Host 1395-web-01
+	HostName 34.74.235.186
+	User ubuntu
+	Port 22
+	PasswordAuthentication no
+	IdentityFile ~/.ssh/holberton
