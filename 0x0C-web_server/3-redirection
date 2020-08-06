@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# config ssh
+sudo apt-get update
+sudo apt-get install nginx
+echo "Holberton School" > /var/www/html/index.nginx-debian.html
+printf %s "server {
+    listen 80;
+    listen [::]:80 default_server;
+    root   /var/www/html;
+    index  index.html index.htm;
+    location /redirect_me {
+        return 301 http://youtube.com/watch?v=QH2-TGUlwu4;
+    }
+}" > /etc/nginx/sites-available/default
+service nginx start
