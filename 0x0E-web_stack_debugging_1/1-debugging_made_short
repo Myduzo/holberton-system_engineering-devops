@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 # Fix Nginx port 80 smoother
-
 sed -i "s/8080/80/g" /etc/nginx/sites-enabled/default
-pkill -f --signal 1 "/usr/bin/nginx"
+service nginx restart
+pkill -f --signal 1 "/usr/sbin/nginx"
