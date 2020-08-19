@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # automate the task of creating a custom HTTP header response with Puppet.
-exec {
+exec { 'http header with puppet':
   command => 'sudo apt-get -y update;
 sudo apt-get -y install nginx;
 
