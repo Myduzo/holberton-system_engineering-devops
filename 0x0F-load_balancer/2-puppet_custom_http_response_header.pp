@@ -5,7 +5,7 @@ exec { 'http header with puppet':
 sudo apt-get -y install nginx;
 
 echo "Holberton School" > /var/www/html/index.nginx-debian.html;
-echo "Ceci n'est pas une page" > /var/www/html/404.html;
+echo "Ceci n\'est pas une page" > /var/www/html/404.html;
 printf %s "server {
     listen 80;
     listen [::]:80 default_server;
@@ -22,5 +22,5 @@ printf %s "server {
     add_header X-Served-By $HOSTNAME;
 }" > /etc/nginx/sites-available/default;
 service nginx restart',
-    provider => shell,
+  provider => shell,
       }
