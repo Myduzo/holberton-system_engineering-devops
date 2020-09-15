@@ -20,7 +20,7 @@ if __name__ == "__main__":
 
     with open('{}.csv'.format(argv[1]), 'w') as file:
         writer = csv.writer(file, delimiter=',', quotechar='"',
-                            quoting=csv.QUOTE_ALL, lineterminator='\n')
+                            quoting=csv.QUOTE_ALL)
         for task in todo:
             writer.writerow([argv[1], name, str(task.get('completed')),
                             task.get('title')])
