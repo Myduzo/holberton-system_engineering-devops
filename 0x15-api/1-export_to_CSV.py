@@ -15,13 +15,13 @@ if __name__ == "__main__":
                             .format(userId))
     name = req_name.json().get("username")
 
-    req_todo = requests.get("http://jsonplaceholder.typicode.com" +
-                            "/todos".format(userId))
+    req_todo = requests.get("http://jsonplaceholder.typicode.com/todos")
     todo = req_todo.json()
 
     with open('{}.csv'.format(userId), 'w') as file:
         writer = csv.writer(file, delimiter=',', quotechar='"',
                             quoting=csv.QUOTE_ALL)
         for task in todo:
-            writer.writerow([userId, name, str(task.get('completed')),
-                            task.get('title')])
+            if task.get('userId') == int(userId):
+                writer.writerow([userId, name, str(task.get('completed')),
+                                task.get('title')])
