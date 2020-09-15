@@ -16,7 +16,7 @@ if __name__ == "__main__":
     req_todo = requests.get("http://jsonplaceholder.typicode.com/" +
                             "users/{}/todos".format(argv[1]))
     todo = req_todo.json()
-    
+
     with open("{}.json".format(argv[1]), "w") as jsonfile:
         out = [{
                 "task":         task.get('title'),
