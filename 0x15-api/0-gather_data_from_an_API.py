@@ -2,27 +2,25 @@
 """script that returns information about his/her TODO list progress."""
 
 import requests
-import sys
+from sys import argv
 
 
 if __name__ == "__main__":
-    userId = sys.argv[1]
-    req_name = requests.get("http://jsonplaceholder.typicode.com/users/{}"
-                            .format(userId))
-    name = req_name.json().get("name")
+    if argv[1].isdigit():
+        req_name = requests.get("http://jsonplaceholder.typicode.com/users/{}"
+                                .format(argv[1]))
+        name = req_name.json().get("name")
 
-    req_todo = requests.get("http://jsonplaceholder.typicode.com/todos")
-    todo = req_todo.json()
+        req_todo = requests.get("http://jsonplaceholder.typicode.com/users/{}/todos"
+                                .format(argv[1]))
+        todo = req_todo.json()
 
-    tasks_done = []
-    totaltasks = 0
-    for task in todo:
-        if task.get("userId") == int(userId):
-            totaltasks += 1
+        tasks_done = []
+        for task in todo:
             if task.get("completed"):
                 tasks_done.append(task.get("title"))
-    print("Employee {} is done with tasks({}/{}):"
-          .format(name, len(tasks_done), totaltasks))
+        print("Employee {} is done with tasks({}/{}):"
+            .format(name, len(tasks_done), len(todo)))
 
-    for element in tasks_done:
-        print("\t {}".format(element))
+        for element in tasks_done:
+            print("\t {}".format(element))
