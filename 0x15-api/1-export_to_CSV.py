@@ -10,18 +10,17 @@ from sys import argv
 
 
 if __name__ == "__main__":
-    userId = argv[1]
     req_name = requests.get("http://jsonplaceholder.typicode.com/users/{}"
-                            .format(userId))
+                            .format(argv[1]))
     name = req_name.json().get("username")
 
-    req_todo = requests.get("http://jsonplaceholder.typicode.com/todos")
+    req_todo = requests.get("http://jsonplaceholder.typicode.com/" +
+                            "users/{}/todos".format(argv[1]))
     todo = req_todo.json()
 
-    with open('{}.csv'.format(userId), 'w') as file:
+    with open('{}.csv'.format(argv[1]), 'w') as file:
         writer = csv.writer(file, delimiter=',', quotechar='"',
                             quoting=csv.QUOTE_ALL)
         for task in todo:
-            if task.get('userId') == int(userId):
-                writer.writerow([userId, name, str(task.get('completed')),
-                                task.get('title')])
+            writer.writerow([argv[1], name, str(task.get('completed')),
+                            task.get('title')])
