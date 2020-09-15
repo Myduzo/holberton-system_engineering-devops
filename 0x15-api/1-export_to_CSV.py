@@ -10,19 +10,17 @@ from sys import argv
 
 
 if __name__ == "__main__":
-    if argv[1].isdigit():
-        req_name = requests.get("http://jsonplaceholder.typicode.com/users/{}"
-                                .format(argv[1]))
-        name = req_name.json().get("name")
+    req_name = requests.get("http://jsonplaceholder.typicode.com/users/{}"
+                            .format(argv[1]))
+    name = req_name.json().get("username")
 
-        req_todo = requests.get("http://jsonplaceholder.typicode.com/" +
-                                "users/{}/todos".format(argv[1]))
-        todo = req_todo.json()
+    req_todo = requests.get("http://jsonplaceholder.typicode.com/" +
+                            "users/{}/todos".format(argv[1]))
+    todo = req_todo.json()
 
-        with open('{}.csv'.format(argv[1]), 'w') as file:
-            writer = csv.writer(file, delimiter=',', quotechar='"',
-                                quoting=csv.QUOTE_ALL, lineterminator='\n')
-            for task in todo:
-                if task.get('userId') == int(argv[1]):
-                    writer.writerow([argv[1], name, str(task.get('completed')),
-                                    task.get('title')])
+    with open('{}.csv'.format(argv[1]), 'w') as file:
+        writer = csv.writer(file, delimiter=',', quotechar='"',
+                            quoting=csv.QUOTE_ALL, lineterminator='\n')
+        for task in todo:
+            writer.writerow([argv[1], name, str(task.get('completed')),
+                            task.get('title')])
