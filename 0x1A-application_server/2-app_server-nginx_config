@@ -1,7 +1,8 @@
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
-
+    add_header X-Served-By 1395-web-01;
+    server_name 34.74.235.186;
 
     location /hbnb_static {
         alias /data/web_static/current/;
@@ -16,9 +17,6 @@ server {
         root /var/www/html;
         internal;
     }
-
-    add_header X-Served-By 1395-web-01;
-    server_name 34.74.235.186;
 
     location /airbnb-onepage/ {
         include proxy_params;
